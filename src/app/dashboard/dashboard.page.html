@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title>App Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        Welcome User!
+
+        <p>User email : <strong>{{ userDetail }}</strong></p>
+      </ion-col>
+    </ion-row>
+
+    <ion-button type="submit" color="danger" expand="block" (click)="signOut()">Signout</ion-button>
+  </ion-grid>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button routerLinkActive="tab-selected" routerLink="list-fight" class="ios" tab="list-fight">
+        <ion-icon name="list-outline"></ion-icon>
+        <ion-label>Fight List</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button routerLinkActive="tab-selected" routerLink="make" class="ios" tab="make">
+        <ion-icon name="add-circle"></ion-icon>
+        <ion-label>Create</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

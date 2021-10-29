@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>fight</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img src="../../assets/img/kiere-pelea-hermano.jpg"></ion-img>
+  <ion-card *ngFor = "let user of usersArray">
+    <ion-card-header >
+      <ion-card-title>Fighting With : </ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content >
+      <ion-chip>
+        <ion-icon name="skull-outline" color="dark"></ion-icon>
+        <ion-label>{{ user.name }}</ion-label>
+      </ion-chip>
+      <ion-chip>
+        <ion-icon name="resize-outline" color="dark"></ion-icon>
+        <ion-label>{{ user.size }}</ion-label>
+      </ion-chip>
+      <ion-chip>
+        <ion-icon name="barbell-outline" color="dark"></ion-icon>
+        <ion-label>{{ user.weight }}</ion-label>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

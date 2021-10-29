@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>listFight</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-list-header>
+            List Fight Users
+      </ion-list-header>
+      <ion-item-sliding *ngFor = "let user of usersArray">
+        <ion-item>
+          <ion-label>
+            <h2>{{ user.name }}</h2>
+            <p>{{ user.size }}</p><p>{{ user.weight }}</p>
+        </ion-label>
+        </ion-item>
+
+        <ion-item-options>
+          <ion-button color="danger" size="large" shape="round" [routerLink]="['/fight/', user.$key]">
+            <ion-icon name="skull-outline"></ion-icon>
+          </ion-button>
+        </ion-item-options>
+      </ion-item-sliding>
+  </ion-list>
+</ion-content>

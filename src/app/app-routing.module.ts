@@ -3,14 +3,35 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
+  {
+      path: 'make',
+      loadChildren: () => import('./make/make.module').then( m => m.MakePageModule)
+  },
+  {
+    path: 'list-fight',
+    loadChildren: () => import('./list-fight/list-fight.module').then( m => m.ListFightPageModule)
+  },
+  {
+    path: 'fight/:id',
+    loadChildren: () => import('./fight/fight.module').then( m => m.FightPageModule)
+  }
+
 ];
 
 @NgModule({

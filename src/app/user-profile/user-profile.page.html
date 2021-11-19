@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>User Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card color="light">
+    <div class="img-wrapper">
+      <ion-img [src]="profileImageUrl" class="image-round"></ion-img>
+      <ion-button color="light" *ngIf="!isLoading  && !isLoaded && isEdit">
+        <input type="file" accept="image/png, image/jpg" (change)="uploadImage($event)" id="file-input" hidden />
+        <label for="file-input" icon-only ion-button>
+          <ion-icon name="camera-outline"></ion-icon>
+        </label>
+      </ion-button>
+    </div>
+    <ion-card-content class="ion-text-center" *ngIf="!isEdit">
+      <ion-item lines="none">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>{{ profileName }}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="mail"></ion-icon>
+        <ion-label>{{ profileEmail }}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="skull-outline" color="dark"></ion-icon>
+        <ion-label>{{ profileAge }}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="resize-outline" color="dark"></ion-icon>
+        <ion-label>{{ profileSize }}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="barbell-outline" color="dark"></ion-icon>
+        <ion-label>{{ profileWeight }}</ion-label>
+      </ion-item>
+    </ion-card-content>
+    <ion-card-content class="ion-text-center" *ngIf="isEdit">
+      <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input type="text" formControlName="name" required  [(ngModel)]="profileName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Age</ion-label>
+          <ion-input type="number" formControlName="age" required [(ngModel)]="profileAge"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Size</ion-label>
+          <ion-input type="number" formControlName="size" required [(ngModel)]="profileSize"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Weight</ion-label>
+          <ion-input type="number" formControlName="weight" required [(ngModel)]="profileWeight"></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="success" shape="round" expand="block">Update</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success">
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="enableProfile()" *ngIf="!isEdit">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="cancel()" *ngIf="isEdit">
+        <ion-icon name="close-sharp"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase,AngularFireList } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
-
+import { User } from './user';
 @Injectable({
   providedIn: 'root',
 })
 export class IonicAuthService {
 
-  itemsRef: AngularFireList<any>;
-  items: Observable<any[]>;
+  private user: User;
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -28,7 +27,7 @@ export class IonicAuthService {
   }
 
   signinUser(value) {
-    return new Promise((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
       this.angularFireAuth
         .signInWithEmailAndPassword(value.email, value.password)
         .then(
@@ -56,6 +55,15 @@ export class IonicAuthService {
 
   userDetails() {
     return this.angularFireAuth.user;
+  }
+
+
+  setUser(userPro: User){
+    return this.user = userPro;
+  }
+
+  getUID(): string {
+    return this.user.uid;
   }
 
 }

@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'fight/:id',
     loadChildren: () => import('./fight/fight.module').then( m => m.FightPageModule)
+  },
+  {
+    path: 'user-profile',
+    loadChildren: () => import('./user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   }
 
 ];

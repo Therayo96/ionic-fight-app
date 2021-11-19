@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'list-fight',
     loadChildren: () => import('../list-fight/list-fight.module').then( m => m.ListFightPageModule)
+  },
+  {
+    path: 'user-profile',
+    loadChildren: () => import('../user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   }
 ];
 

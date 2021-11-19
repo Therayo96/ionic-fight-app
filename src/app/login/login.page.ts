@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicAuthService } from '../shared/ionic-auth.service';
@@ -14,6 +15,7 @@ export class LoginPage implements OnInit {
   userForm: FormGroup;
   successMsg: string;
   errorMsg: string;
+  url = 'dashboard';
 
   error_msg = {
     'email': [
@@ -38,10 +40,12 @@ export class LoginPage implements OnInit {
     ]
   };
 
+
   constructor(
     private router: Router,
     private ionicAuthService: IonicAuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private db: AngularFireDatabase
   ) { }
 
   ngOnInit() {
@@ -59,10 +63,28 @@ export class LoginPage implements OnInit {
 
   signIn(value) {
     this.ionicAuthService.signinUser(value)
-      .then((response) => {
-        console.log(response);
+      .then((resp) => {
         this.errorMsg = '';
-        this.router.navigateByUrl('dashboard');
+        console.log(resp.user);
+
+        if(resp.user){
+            this.ionicAuthService.setUser({
+                username: resp.user.displayName,
+                uid: resp.user.uid
+            });
+        }
+
+        const userProfile = this.db.object(`profile/${this.ionicAuthService.getUID()}`);
+        userProfile.valueChanges().subscribe(result => {
+          if(!result){
+            this.db.object(`profile/${this.ionicAuthService.getUID()}`).set({
+                name: resp.user.displayName,
+                email: resp.user.email
+            });
+            this.url = 'user-profile';
+          }
+          this.router.navigateByUrl(this.url);
+        });
       }, error => {
         this.errorMsg = error.message;
         this.successMsg = '';

@@ -7,8 +7,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
+<ion-content fullscreen>
+  <swiper #swiper [config]="config">
+    <ng-template *ngFor = "let user of usersArray" swiperSlide>
+      <ion-card>
+        <img [src]="user.photo" />
+        <ion-card-header>
+          <ion-card-subtitle>Nombre</ion-card-subtitle>
+          <ion-card-title>{{ user.name }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="text-align: center;">
+            <ion-button size="medium" style="width: 30%;" color="danger" (click)="delete(item)">
+              <ion-icon slot="icon-only" name="trash-bin"></ion-icon>
+            </ion-button>
+            <ion-button size="medium" style="width: 30%;" color="success" (click)="complete(item)" [routerLink]="['/fight/', user.$key]">
+              <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+  </swiper>
+  <!-- <ion-list>
       <ion-list-header>
             List Fight Users
       </ion-list-header>
@@ -26,5 +47,5 @@
           </ion-button>
         </ion-item-options>
       </ion-item-sliding>
-  </ion-list>
+  </ion-list> -->
 </ion-content>

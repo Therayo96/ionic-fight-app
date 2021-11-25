@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ListFightPageRoutingModule } from './list-fight-routing.module';
 
 import { ListFightPage } from './list-fight.page';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListFightPageRoutingModule
+    ListFightPageRoutingModule,
+    SwiperModule
   ],
   declarations: [ListFightPage]
 })
